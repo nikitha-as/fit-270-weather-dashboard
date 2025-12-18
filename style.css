@@ -58,7 +58,7 @@ body {
 }
 
 #fc {
-    background-color: #ffffff;
+    background-color: #000000;
     color: #ffffff;
     border-radius: 12px;
     display: inline-flex;
@@ -71,14 +71,28 @@ body {
     cursor: pointer;
 }
 
-#fahrenheit {
+.fahrenheit {
     background-color: #000000;
     color: #ffffff;
     border-radius: 50%;
     padding: 4px 8px;
 }
 
-#celsius {
+.celsius {
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 50%;
+    padding: 4px 8px;
+}
+
+.deselect-temp-scale {
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 4px 8px;
+}
+
+.select-temp-scale {
     background-color: #ffffff;
     color: #000000;
     border-radius: 50%;
@@ -137,9 +151,6 @@ body {
 #city-temperature-container {
     display: flex;
     gap: 2px;
-}
-
-#city-temperature {
     font-size: 34px;
 }
 
@@ -163,6 +174,8 @@ body {
 
 #search-container {
     margin-top: 20px;
+    display: flex;
+    gap: 5px;
 }
 
 #search {
@@ -175,7 +188,8 @@ body {
     color: #ffffff;
     border: none;
     border-radius: 4px;
-    padding: 6px;
+    padding: 4px;
+    height: 30px;
 }
 
 .all-cities {
@@ -226,6 +240,21 @@ body {
     width: 50px;
 }
 
+#search-city {
+    display: flex;
+    flex-direction: column;
+}
+
+.now-text {
+    font-size: 12px;
+}
+
+#error-message {
+    place-self: end;
+    color: #f40909;
+    font-size: 12px;
+}
+
 
 @media screen and (min-width: 390px) and (max-width: 699px) {
     #container {
@@ -247,7 +276,7 @@ body {
 
 }
 
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 730px) {
     #container {
         flex-direction: row;
     }

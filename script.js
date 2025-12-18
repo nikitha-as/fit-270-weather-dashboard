@@ -9,6 +9,11 @@ const tempMin = document.getElementById("temp_min");
 const otherCityName = document.getElementById("other-city-name");
 const humidity = document.getElementById("humidity");
 const searchContainer = document.getElementById("search-container");
+const search = document.getElementById("search");
+const errorMessage = document.getElementById("error-message");
+const fahrenheitBtn = document.getElementById("fahrenheit");
+const celsiusBtn = document.getElementById("celsius");
+const degNotation = document.querySelectorAll(".deg-notation");
 const loader = document.getElementById("loader");
 const city1 = document.getElementById("city-1");
 const cityTemp1 = document.getElementById("city-temp-1");
@@ -28,20 +33,32 @@ const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 
 const cities = ["Hyderabad", "Bangalore", "Chennai", "Mumbai", "Delhi"];
 
+let temp_scale = "C";
+let cData = {};
+
 async function fetchWeather(city) {
   try {
     container.style.display = "none";
     loader.style.display = "block";
     const url = `${BASE_URL}?q=${city}&appid=${API_KEY}`;
     const response = await fetch(url);
-    const data = await response.json();
-    return data;
+    errorMessage.classList.add("hidden");
+    errorMessage.textContent = "";
+    search.style.color = "";
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      errorMessage.textContent = "City not found!";
+      errorMessage.classList.toggle("hidden");
+      search.style.color = "#f40909";
+    }
   } catch (error) {
     console.log("error: ", error);
   }
 }
 
-async function fetchAllCitiesWeather() {
+async function fetchAllCitiesWeather(temp_scale) {
   try {
     const allCitiesWeather = cities.map((city) => fetchWeather(city));
     const responses = await Promise.all(allCitiesWeather);
@@ -49,28 +66,28 @@ async function fetchAllCitiesWeather() {
     loader.style.display = "none";
     container.style.display = "flex";
 
-    mainCityName.textContent = responses[0].name;
-    cityTemperature.textContent = Math.ceil(responses[0].main.temp - 273.15);
+    displayCityDetails(responses[0], temp_scale);
+    cData = { ...responses[0] };
 
-    tempMax.textContent = Math.ceil(responses[0].main.temp_max - 273.15);
-    tempMin.textContent = Math.floor(responses[0].main.temp_min - 273.15);
-    humidity.textContent = Math.floor(responses[0].main.humidity);
-
-    const feelsLikeTempVal = Math.ceil(responses[0].main.feels_like - 273.15);
-    feelsLikeTemp.textContent = feelsLikeTempVal;
-    if (feelsLikeTempVal >= 18 && feelsLikeTempVal <= 27) {
-      weatherCondition.textContent = "Cloudy";
-    } else if (feelsLikeTempVal >= 28 && feelsLikeTempVal <= 40) {
-      weatherCondition.textContent = "Sunny";
-    }
-
-    cityTemp1.textContent = Math.ceil(responses[1].main.temp - 273.15);
+    cityTemp1.textContent =
+      temp_scale == "F"
+        ? Math.ceil((responses[1].main.temp - 273.15) * (9 / 5) + 32)
+        : Math.ceil(responses[1].main.temp - 273.15);
     cityName1.textContent = responses[1].name;
-    cityTemp2.textContent = Math.ceil(responses[2].main.temp - 273.15);
+    cityTemp2.textContent =
+      temp_scale == "F"
+        ? Math.ceil((responses[2].main.temp - 273.15) * (9 / 5) + 32)
+        : Math.ceil(responses[2].main.temp - 273.15);
     cityName2.textContent = responses[2].name;
-    cityTemp3.textContent = Math.ceil(responses[3].main.temp - 273.15);
+    cityTemp3.textContent =
+      temp_scale == "F"
+        ? Math.ceil((responses[3].main.temp - 273.15) * (9 / 5) + 32)
+        : Math.ceil(responses[3].main.temp - 273.15);
     cityName3.textContent = responses[3].name;
-    cityTemp4.textContent = Math.ceil(responses[4].main.temp - 273.15);
+    cityTemp4.textContent =
+      temp_scale == "F"
+        ? Math.ceil((responses[4].main.temp - 273.15) * (9 / 5) + 32)
+        : Math.ceil(responses[4].main.temp - 273.15);
     cityName4.textContent = responses[4].name;
   } catch (error) {
     console.log("error: ", error);
@@ -79,4 +96,80 @@ async function fetchAllCitiesWeather() {
   }
 }
 
-fetchAllCitiesWeather();
+fetchAllCitiesWeather(temp_scale);
+
+async function displayCityDetails(data) {
+  loader.style.display = "none";
+  container.style.display = "flex";
+  mainCityName.textContent = data.name;
+  cityTemperature.textContent =
+    temp_scale == "F"
+      ? Math.ceil((data.main.temp - 273.15) * (9 / 5) + 32)
+      : Math.ceil(data.main.temp - 273.15);
+
+  tempMax.textContent =
+    temp_scale == "F"
+      ? Math.ceil((data.main.temp_max - 273.15) * (9 / 5) + 32)
+      : Math.ceil(data.main.temp_max - 273.15);
+  tempMin.textContent =
+    temp_scale == "F"
+      ? Math.ceil((data.main.temp_min - 273.15) * (9 / 5) + 32)
+      : Math.ceil(data.main.temp_min - 273.15);
+  humidity.textContent = data.main.humidity;
+
+  const feelsLikeTempVal =
+    temp_scale == "F"
+      ? Math.ceil((data.main.feels_like - 273.15) * (9 / 5) + 32)
+      : Math.ceil(data.main.feels_like - 273.15);
+  feelsLikeTemp.textContent = feelsLikeTempVal;
+  if (feelsLikeTempVal >= 18 && feelsLikeTempVal <= 27) {
+    weatherCondition.textContent = "Cloudy";
+  } else if (feelsLikeTempVal >= 28 && feelsLikeTempVal <= 40) {
+    weatherCondition.textContent = "Sunny";
+  }
+}
+
+searchContainer.addEventListener("submit", async function (event) {
+  event.preventDefault();
+  loader.style.display = "none";
+  container.style.display = "flex";
+  try {
+    let searchVal = search.value;
+
+    const city = fetchWeather(searchVal);
+    const cityData = await Promise.resolve(city);
+    if (cityData) {
+      displayCityDetails(cityData, "C");
+    }
+    loader.style.display = "none";
+    container.style.display = "flex";
+  } catch (e) {
+    console.log("error: ", e);
+    loader.style.display = "none";
+    container.style.display = "flex";
+  }
+});
+
+fahrenheitBtn.addEventListener("click", function () {
+  temp_scale = "F";
+  console.log("f temp_scale: ", temp_scale);
+  fetchAllCitiesWeather(temp_scale);
+  degNotation.forEach((deg) => {
+    deg.textContent = "°F";
+  });
+  fahrenheitBtn.classList.add("select-temp-scale");
+  celsiusBtn.classList.remove("select-temp-scale");
+  celsiusBtn.classList.add("deselect-temp-scale");
+});
+
+celsiusBtn.addEventListener("click", function () {
+  temp_scale = "C";
+  console.log("c temp_scale: ", temp_scale);
+  fetchAllCitiesWeather(temp_scale);
+  degNotation.forEach((deg) => {
+    deg.textContent = "°C";
+  });
+  celsiusBtn.classList.add("select-temp-scale");
+  fahrenheitBtn.classList.remove("select-temp-scale");
+  fahrenheitBtn.classList.add("deselect-temp-scale");
+});

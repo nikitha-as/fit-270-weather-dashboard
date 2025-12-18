@@ -18,25 +18,25 @@
                     <div id="main-place">
                         <div id="main-city-name">India</div>
                     </div>
-                    <div>
+                    <div class="weather-now-text">
                         Weather 
-                        <span>Now</span>
+                        <span class="now-text">Now</span>
                     </div>
                     <div id="city-temperature-container"> 
-                        <p id="city-temperature"></p><span>&deg C</span>
+                        <p id="city-temperature"></p><span class="deg-notation">&degC</span>
                     </div>
-                    <div id="high-low-container"><span id="high-container">High: <p id="temp_max"></p> </span><span id="low-container">Low: <p id="temp_min"></p>  </span></div>
+                    <div id="high-low-container"><span id="high-container">High: <p id="temp_max"></p></span><span id="low-container">Low: <p id="temp_min"></p></span></div>
                 </div>
                 <div id="main-city-right-content">
                     <div id="fc">
-                        <button id="fahrenheit" class="btn">F</button>
-                        <button id="celsius" class="btn">C</button>
+                        <button id="fahrenheit" class="btn fahrenheit">F</button>
+                        <button id="celsius" class="btn celsius">C</button>
                     </div>
                     <div>
                     </div>
                     <div id="weather-condition-container">
                         <div id="weather-condition">Cloudy</div>
-                        <div id="weather-condition-content">Feels like <div id="feels-like"></div><span>&deg C</span></div>
+                        <div id="weather-condition-content">Feels like <div id="feels-like"></div><span class="deg-notation">&deg C</span></div>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <div class="all-cities">
                     <div class="o-city" id="city-1">
                         <div class="o-city-card"> 
-                            <div class="o-city-temperature"><div id="city-temp-1"></div>&deg</div>
+                            <div class="o-city-temperature"><div id="city-temp-1"></div><span class="deg-notation">&deg C</span></div>
                             <div class="o-city-content">
                                 <div class="o-city-name" id="city-name-1"></div>
                                 <div>
@@ -58,7 +58,7 @@
                     </div>
                    <div class="o-city" id="city-2">
                         <div class="o-city-card"> 
-                            <div class="o-city-temperature"><div id="city-temp-2"></div>&deg</div>
+                            <div class="o-city-temperature"><div id="city-temp-2"></div><span class="deg-notation">&deg C</span></div>
                             <div class="o-city-content">
                                 <div class="o-city-name" id="city-name-2"></div>
                                 <div>
@@ -69,7 +69,7 @@
                     </div>
                      <div class="o-city" id="city-3">
                         <div class="o-city-card"> 
-                            <div class="o-city-temperature"><div id="city-temp-3"></div>&deg</div>
+                            <div class="o-city-temperature"><div id="city-temp-3"></div><span class="deg-notation">&deg C</span></div>
                             <div class="o-city-content">
                                 <div class="o-city-name" id="city-name-3"></div>
                                 <div>
@@ -80,7 +80,7 @@
                     </div>
                      <div class="o-city" id="city-4">
                         <div class="o-city-card"> 
-                            <div class="o-city-temperature"><div id="city-temp-4"></div>&deg</div>
+                            <div class="o-city-temperature"><div id="city-temp-4"></div><span class="deg-notation">&deg C</span></div>
                             <div class="o-city-content">
                                 <div class="o-city-name" id="city-name-4"></div>
                                 <div>
@@ -93,16 +93,19 @@
             </div>
         </div>
         <div id="right-container">
-            <div id="search-container">
-                <input type="text" name="search" id="search" placeholder="Search city">
-                <button type="button" id="search-btn" class="btn">Search</button>
-            </div>
+                <form id="search-container" method="post">
+                    <div id="search-city">
+                        <input type="text" name="search" id="search" placeholder="Search city" required>
+                        <div id="error-message" class="hidden">City not found!</div>
+                    </div>
+                    <button type="submit" id="search-btn" class="btn">Search</button>
+                </form>
             <div class="highlights">
                 <h2 class="highlights-heading">Today highlight</h2>
                 <div class="humidity-container">
                     <div>Humidity</div>
                     <div class="humidity-content">
-                        <div class="humidity-temp"><div id="humidity"></div>&deg C</div>
+                        <div class="humidity-temp"><div id="humidity"></div>%</div>
                         <div><img src="assets/images/humidity-img.png" class="humidity-img" alt="humidity"></div>
                     </div>
                 </div>
