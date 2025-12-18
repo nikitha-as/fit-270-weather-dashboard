@@ -1,0 +1,265 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    background-color: #000000;
+    color: #f0f8ff;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    min-height: 100vh;
+    height: 100%;
+}
+
+#right-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+#weather-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#weather-card {
+    background-color: #14203a;
+    border-radius: 10px;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+#main-place {
+    background-color: #4e39c6;
+    border-radius: 12px;
+    padding: 4px 10px;
+}
+
+#main-temperature {
+    font-size: 30px;
+}
+
+#fc {
+    background-color: #ffffff;
+    color: #ffffff;
+    border-radius: 12px;
+    display: inline-flex;
+    justify-content: space-between;
+    width: 48px;
+}
+
+.btn {
+    border: none;
+    cursor: pointer;
+}
+
+#fahrenheit {
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 4px 8px;
+}
+
+#celsius {
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 50%;
+    padding: 4px 8px;
+}
+
+#weather-condition {
+    font-size: 30px;
+}
+
+#weather-condition-content {
+    font-size: 12px;
+}
+
+#all-cities-container {
+    margin-top: 40px;
+}
+
+#all-cities-heading {
+    padding-bottom: 10px;
+}
+
+.cloud-img {
+    width: 50px;
+}
+
+.o-city-card {
+    background-color: #14203a;
+    width: 125px;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.o-city-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#main-city-left-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#main-city-right-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hidden {
+    display: none;
+}
+
+#city-temperature-container {
+    display: flex;
+    gap: 2px;
+}
+
+#city-temperature {
+    font-size: 34px;
+}
+
+#weather-condition-content {
+    display: flex;
+    gap: 4px;
+}
+
+#high-container {
+    display: flex;
+}
+
+#low-container {
+    display: flex;
+}
+
+#high-low-container {
+    display: flex;
+    gap: 10px;
+}
+
+#search-container {
+    margin-top: 20px;
+}
+
+#search {
+    padding: 4px 2px;
+    width: 270px;
+}
+
+#search-btn {
+    background-color: #483ac7;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px;
+}
+
+.all-cities {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.highlights {
+    margin-bottom: 10px;
+    background-color: #14203a;
+    border-radius: 10px;
+    padding: 10px;
+    height: 230px;
+}
+
+.highlights-heading {
+    padding: 20px 0;
+}
+
+.o-city-temperature {
+    display: flex;
+    font-size: 20px;
+}
+
+.humidity-container {
+   background-color: #0e1422;
+    border-radius: 10px;
+    padding: 10px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.humidity-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.humidity-temp {
+    display: flex;
+    font-size: 24px;
+}
+
+.humidity-img {
+    width: 50px;
+}
+
+
+@media screen and (min-width: 390px) and (max-width: 699px) {
+    #container {
+        flex-direction: column;
+    }
+
+    #right-container {
+        justify-content: normal;
+        gap: 50px;
+    }
+
+    #search-container {
+        margin-top: 50px;
+    }
+
+    #search {
+        width: 270px;
+    }
+
+}
+
+@media screen and (min-width: 700px) {
+    #container {
+        flex-direction: row;
+    }
+
+    #right-container {
+        justify-content: space-between;
+        min-height: 550px;
+        height: 100%;
+    }
+
+    #search-container {
+        margin-top: 20px;
+    }
+
+} 

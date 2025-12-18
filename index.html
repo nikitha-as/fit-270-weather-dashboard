@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="loader" style="display: none;">Loading...</div>
+    <div id="container">
+        <div id="weather-container">
+            <div id="weather-card">
+                <div id="main-city-left-content">
+                    <div id="main-place">
+                        <div id="main-city-name">India</div>
+                    </div>
+                    <div>
+                        Weather 
+                        <span>Now</span>
+                    </div>
+                    <div id="city-temperature-container"> 
+                        <p id="city-temperature"></p><span>&deg C</span>
+                    </div>
+                    <div id="high-low-container"><span id="high-container">High: <p id="temp_max"></p> </span><span id="low-container">Low: <p id="temp_min"></p>  </span></div>
+                </div>
+                <div id="main-city-right-content">
+                    <div id="fc">
+                        <button id="fahrenheit" class="btn">F</button>
+                        <button id="celsius" class="btn">C</button>
+                    </div>
+                    <div>
+                    </div>
+                    <div id="weather-condition-container">
+                        <div id="weather-condition">Cloudy</div>
+                        <div id="weather-condition-content">Feels like <div id="feels-like"></div><span>&deg C</span></div>
+                    </div>
+                </div>
+            </div>
+            <div id="all-cities-container">
+                <h2 id="all-cities-heading">Other cities</h2>
+                <div class="all-cities">
+                    <div class="o-city" id="city-1">
+                        <div class="o-city-card"> 
+                            <div class="o-city-temperature"><div id="city-temp-1"></div>&deg</div>
+                            <div class="o-city-content">
+                                <div class="o-city-name" id="city-name-1"></div>
+                                <div>
+                                    <img src="assets/images/clouds-img.png" class="cloud-img" alt="clouds">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                   <div class="o-city" id="city-2">
+                        <div class="o-city-card"> 
+                            <div class="o-city-temperature"><div id="city-temp-2"></div>&deg</div>
+                            <div class="o-city-content">
+                                <div class="o-city-name" id="city-name-2"></div>
+                                <div>
+                                    <img src="assets/images/clouds-img.png" class="cloud-img" alt="clouds">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="o-city" id="city-3">
+                        <div class="o-city-card"> 
+                            <div class="o-city-temperature"><div id="city-temp-3"></div>&deg</div>
+                            <div class="o-city-content">
+                                <div class="o-city-name" id="city-name-3"></div>
+                                <div>
+                                    <img src="assets/images/clouds-img.png" class="cloud-img" alt="clouds">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="o-city" id="city-4">
+                        <div class="o-city-card"> 
+                            <div class="o-city-temperature"><div id="city-temp-4"></div>&deg</div>
+                            <div class="o-city-content">
+                                <div class="o-city-name" id="city-name-4"></div>
+                                <div>
+                                    <img src="assets/images/clouds-img.png" class="cloud-img" alt="clouds">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="right-container">
+            <div id="search-container">
+                <input type="text" name="search" id="search" placeholder="Search city">
+                <button type="button" id="search-btn" class="btn">Search</button>
+            </div>
+            <div class="highlights">
+                <h2 class="highlights-heading">Today highlight</h2>
+                <div class="humidity-container">
+                    <div>Humidity</div>
+                    <div class="humidity-content">
+                        <div class="humidity-temp"><div id="humidity"></div>&deg C</div>
+                        <div><img src="assets/images/humidity-img.png" class="humidity-img" alt="humidity"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
