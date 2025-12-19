@@ -64,6 +64,7 @@ body {
     display: inline-flex;
     justify-content: space-between;
     width: 48px;
+    place-self: end;
 }
 
 .btn {
@@ -121,7 +122,6 @@ body {
 
 .o-city-card {
     background-color: #14203a;
-    width: 125px;
     border-radius: 5px;
     padding: 20px;
 }
@@ -135,6 +135,7 @@ body {
 #main-city-left-content {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 20px;
 }
 
@@ -175,20 +176,29 @@ body {
 #search-container {
     margin-top: 20px;
     display: flex;
+    justify-content: space-between;
+    width: 260px;
     gap: 5px;
 }
 
 #search {
-    padding: 4px 2px;
-    width: 270px;
+    padding: 7px 8px 7px 28px;
+    width: 89%;
+    position: absolute;
+    background-color: #14203a;
+    color: #ffffff;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border: none;
 }
 
 #search-btn {
     background-color: #483ac7;
     color: #ffffff;
     border: none;
-    border-radius: 4px;
-    padding: 4px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 4px 6px;
     height: 30px;
 }
 
@@ -243,6 +253,9 @@ body {
 #search-city {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 50px;
+    justify-content: space-between;
 }
 
 .now-text {
@@ -250,11 +263,25 @@ body {
 }
 
 #error-message {
-    place-self: end;
     color: #f40909;
     font-size: 12px;
 }
 
+.search-input {
+    position: relative;
+}
+
+.magnifying-glass-icon {
+    position: absolute;
+    width: 15px;
+    z-index: 10;
+    top: 7px;
+    left: 7px;
+}
+
+.magnifying-glass-icon img {
+    width: 15px;
+}
 
 @media screen and (min-width: 390px) and (max-width: 699px) {
     #container {
@@ -292,3 +319,25 @@ body {
     }
 
 } 
+
+@media screen and (min-width: 1370px) {
+    #container {
+        flex-direction: row;
+        gap: 50px;
+    }
+
+    #weather-card {
+        width: 500px;
+        height: 250px;
+    }
+
+     #right-container {
+        min-height: 640px;
+        height: 100%;
+    }
+
+    #search-container {
+        width: 350px;
+    }
+
+}

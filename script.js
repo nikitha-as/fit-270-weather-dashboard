@@ -50,11 +50,16 @@ async function fetchWeather(city) {
       return data;
     } else {
       errorMessage.textContent = "City not found!";
-      errorMessage.classList.toggle("hidden");
+      errorMessage.classList.remove("hidden");
       search.style.color = "#f40909";
     }
   } catch (error) {
     console.log("error: ", error);
+    errorMessage.textContent = "Something went wrong. Try again!";
+    errorMessage.classList.remove("hidden");
+    search.style.color = "#f40909";
+  } finally {
+    loader.style.display = "none";
   }
 }
 
@@ -152,7 +157,6 @@ searchContainer.addEventListener("submit", async function (event) {
 
 fahrenheitBtn.addEventListener("click", function () {
   temp_scale = "F";
-  console.log("f temp_scale: ", temp_scale);
   fetchAllCitiesWeather(temp_scale);
   degNotation.forEach((deg) => {
     deg.textContent = "°F";
@@ -164,7 +168,6 @@ fahrenheitBtn.addEventListener("click", function () {
 
 celsiusBtn.addEventListener("click", function () {
   temp_scale = "C";
-  console.log("c temp_scale: ", temp_scale);
   fetchAllCitiesWeather(temp_scale);
   degNotation.forEach((deg) => {
     deg.textContent = "°C";

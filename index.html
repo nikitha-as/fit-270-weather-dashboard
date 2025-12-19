@@ -95,7 +95,10 @@
         <div id="right-container">
                 <form id="search-container" method="post">
                     <div id="search-city">
-                        <input type="text" name="search" id="search" placeholder="Search city" required>
+                        <div class="search-input">
+                            <div class="magnifying-glass-icon"><img src="assets/images/magnifying-glass.png" alt="magnifying glass"></div>
+                            <input type="text" name="search" id="search" placeholder="Search city..." required>
+                        </div>
                         <div id="error-message" class="hidden">City not found!</div>
                     </div>
                     <button type="submit" id="search-btn" class="btn">Search</button>
