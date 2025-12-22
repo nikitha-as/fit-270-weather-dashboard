@@ -35,6 +35,7 @@ const cities = ["Hyderabad", "Bangalore", "Chennai", "Mumbai", "Delhi"];
 
 let temp_scale = "C";
 let cData = {};
+let mainCity;
 
 async function fetchWeather(city) {
   try {
@@ -63,7 +64,7 @@ async function fetchWeather(city) {
   }
 }
 
-async function fetchAllCitiesWeather(temp_scale) {
+async function fetchAllCitiesWeather(temp_scale, mainCity) {
   try {
     const allCitiesWeather = cities.map((city) => fetchWeather(city));
     const responses = await Promise.all(allCitiesWeather);
@@ -71,8 +72,16 @@ async function fetchAllCitiesWeather(temp_scale) {
     loader.style.display = "none";
     container.style.display = "flex";
 
-    displayCityDetails(responses[0], temp_scale);
-    cData = { ...responses[0] };
+    let mainCityDetails;
+
+    if (mainCity) {
+      mainCityDetails = await fetchWeather(mainCity);
+    } else {
+      mainCityDetails = responses[0];
+    }
+
+    displayCityDetails(mainCityDetails, temp_scale);
+    cData = { ...mainCityDetails };
 
     cityTemp1.textContent =
       temp_scale == "F"
@@ -101,7 +110,7 @@ async function fetchAllCitiesWeather(temp_scale) {
   }
 }
 
-fetchAllCitiesWeather(temp_scale);
+fetchAllCitiesWeather(temp_scale, mainCity);
 
 async function displayCityDetails(data) {
   loader.style.display = "none";
@@ -157,7 +166,8 @@ searchContainer.addEventListener("submit", async function (event) {
 
 fahrenheitBtn.addEventListener("click", function () {
   temp_scale = "F";
-  fetchAllCitiesWeather(temp_scale);
+  let mainCity = document.getElementById("search")?.value;
+  fetchAllCitiesWeather(temp_scale, mainCity);
   degNotation.forEach((deg) => {
     deg.textContent = "°F";
   });
@@ -168,7 +178,8 @@ fahrenheitBtn.addEventListener("click", function () {
 
 celsiusBtn.addEventListener("click", function () {
   temp_scale = "C";
-  fetchAllCitiesWeather(temp_scale);
+  let mainCity = document.getElementById("search")?.value;
+  fetchAllCitiesWeather(temp_scale, mainCity);
   degNotation.forEach((deg) => {
     deg.textContent = "°C";
   });
