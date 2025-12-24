@@ -188,7 +188,7 @@ body {
 }
 
 #search {
-    padding: 7px 8px 7px 28px;
+    padding: 8px 8px 6.5px 28px;
     width: 89%;
     position: absolute;
     background-color: #14203a;
@@ -330,8 +330,12 @@ body {
     }
 
     #search-container {
-        margin-top: 10px;
+        margin-top: 8px;
         width: 340px;
+    }
+   
+    #search {
+        padding: 8px 8px 7px 28px;
     }
 
     .highlights-mb {
@@ -353,7 +357,7 @@ body {
     }
 
     #weather-card {
-        width: 500px;
+        width: 450px;
         height: 250px;
     }
 
@@ -364,10 +368,19 @@ body {
 
     #search-container {
         width: 340px;
+        margin-top: 12px;
+    }
+
+    #search {
+        padding: 8px 8px 6.7px 28px;
     }
 
     .highlights-mb {
         display: none;
+    }
+
+    .highlights {
+        margin-bottom: 11px;
     }
 
 }
