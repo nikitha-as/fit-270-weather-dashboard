@@ -8,6 +8,7 @@ const tempMax = document.getElementById("temp_max");
 const tempMin = document.getElementById("temp_min");
 const otherCityName = document.getElementById("other-city-name");
 const humidity = document.getElementById("humidity");
+const humidityMb = document.getElementById("humidity-mb");
 const searchContainer = document.getElementById("search-container");
 const search = document.getElementById("search");
 const errorMessage = document.getElementById("error-message");
@@ -27,11 +28,15 @@ const cityName3 = document.getElementById("city-name-3");
 const city4 = document.getElementById("city-4");
 const cityTemp4 = document.getElementById("city-temp-4");
 const cityName4 = document.getElementById("city-name-4");
+const icon1 = document.getElementById("icon-1");
+const icon2 = document.getElementById("icon-2");
+const icon3 = document.getElementById("icon-3");
+const icon4 = document.getElementById("icon-4");
 
 const API_KEY = "2e362a2bbc766ceb82b15aba7c617f38";
 const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 
-const cities = ["Hyderabad", "Bangalore", "Chennai", "Mumbai", "Delhi"];
+const cities = ["Hyderabad", "Bangalore", "Delhi", "Mumbai", "Moscow"];
 
 let temp_scale = "C";
 let cData = {};
@@ -83,26 +88,28 @@ async function fetchAllCitiesWeather(temp_scale, mainCity) {
     displayCityDetails(mainCityDetails, temp_scale);
     cData = { ...mainCityDetails };
 
-    cityTemp1.textContent =
-      temp_scale == "F"
-        ? Math.ceil((responses[1].main.temp - 273.15) * (9 / 5) + 32)
-        : Math.ceil(responses[1].main.temp - 273.15);
+    cityTemp1.textContent = fetchTemp(responses[1].main.temp);
     cityName1.textContent = responses[1].name;
-    cityTemp2.textContent =
-      temp_scale == "F"
-        ? Math.ceil((responses[2].main.temp - 273.15) * (9 / 5) + 32)
-        : Math.ceil(responses[2].main.temp - 273.15);
+    cityTemp2.textContent = fetchTemp(responses[2].main.temp);
     cityName2.textContent = responses[2].name;
-    cityTemp3.textContent =
-      temp_scale == "F"
-        ? Math.ceil((responses[3].main.temp - 273.15) * (9 / 5) + 32)
-        : Math.ceil(responses[3].main.temp - 273.15);
+    cityTemp3.textContent = fetchTemp(responses[3].main.temp);
     cityName3.textContent = responses[3].name;
-    cityTemp4.textContent =
-      temp_scale == "F"
-        ? Math.ceil((responses[4].main.temp - 273.15) * (9 / 5) + 32)
-        : Math.ceil(responses[4].main.temp - 273.15);
+    cityTemp4.textContent = fetchTemp(responses[4].main.temp);
     cityName4.textContent = responses[4].name;
+
+    let f_temp_1 = convertKelvinToFahrenheit(responses[1].main.temp);
+    let c_temp_1 = convertKelvinToCelsius(responses[1].main.temp);
+    let f_temp_2 = convertKelvinToFahrenheit(responses[2].main.temp);
+    let c_temp_2 = convertKelvinToCelsius(responses[2].main.temp);
+    let f_temp_3 = convertKelvinToFahrenheit(responses[3].main.temp);
+    let c_temp_3 = convertKelvinToCelsius(responses[3].main.temp);
+    let f_temp_4 = convertKelvinToFahrenheit(responses[4].main.temp);
+    let c_temp_4 = convertKelvinToCelsius(responses[4].main.temp);
+
+    fetchIconUrl(icon1, f_temp_1, c_temp_1);
+    fetchIconUrl(icon2, f_temp_2, c_temp_2);
+    fetchIconUrl(icon3, f_temp_3, c_temp_3);
+    fetchIconUrl(icon4, f_temp_4, c_temp_4);
   } catch (error) {
     console.log("error: ", error);
     loader.style.display = "none";
@@ -116,27 +123,18 @@ async function displayCityDetails(data) {
   loader.style.display = "none";
   container.style.display = "flex";
   mainCityName.textContent = data.name;
-  cityTemperature.textContent =
-    temp_scale == "F"
-      ? Math.ceil((data.main.temp - 273.15) * (9 / 5) + 32)
-      : Math.ceil(data.main.temp - 273.15);
+  cityTemperature.textContent = fetchTemp(data.main.temp);
 
-  tempMax.textContent =
-    temp_scale == "F"
-      ? Math.ceil((data.main.temp_max - 273.15) * (9 / 5) + 32)
-      : Math.ceil(data.main.temp_max - 273.15);
-  tempMin.textContent =
-    temp_scale == "F"
-      ? Math.ceil((data.main.temp_min - 273.15) * (9 / 5) + 32)
-      : Math.ceil(data.main.temp_min - 273.15);
+  tempMax.textContent = fetchTemp(data.main.temp_max);
+  tempMin.textContent = fetchTemp(data.main.temp_min);
   humidity.textContent = data.main.humidity;
+  humidityMb.textContent = data.main.humidity;
 
-  const feelsLikeTempVal =
-    temp_scale == "F"
-      ? Math.ceil((data.main.feels_like - 273.15) * (9 / 5) + 32)
-      : Math.ceil(data.main.feels_like - 273.15);
+  const feelsLikeTempVal = fetchTemp(data.main.feels_like);
   feelsLikeTemp.textContent = feelsLikeTempVal;
-  if (feelsLikeTempVal >= 18 && feelsLikeTempVal <= 27) {
+  if (feelsLikeTempVal <= 5) {
+    weatherCondition.textContent = "Freezing";
+  } else if (feelsLikeTempVal >= 18 && feelsLikeTempVal <= 27) {
     weatherCondition.textContent = "Cloudy";
   } else if (feelsLikeTempVal >= 28 && feelsLikeTempVal <= 40) {
     weatherCondition.textContent = "Sunny";
@@ -187,3 +185,27 @@ celsiusBtn.addEventListener("click", function () {
   fahrenheitBtn.classList.remove("select-temp-scale");
   fahrenheitBtn.classList.add("deselect-temp-scale");
 });
+
+function convertKelvinToFahrenheit(temp) {
+  return Math.ceil((temp - 273.15) * (9 / 5) + 32);
+}
+
+function convertKelvinToCelsius(temp) {
+  return Math.ceil(temp - 273.15);
+}
+
+function fetchTemp(kTemp) {
+  return temp_scale == "F"
+    ? convertKelvinToFahrenheit(kTemp)
+    : convertKelvinToCelsius(kTemp);
+}
+
+function fetchIconUrl(icon, f_temp, c_temp) {
+  if (f_temp <= 41 || c_temp <= 5) {
+    icon.src = "assets/images/snowflake.png";
+  } else if (f_temp <= 72 || c_temp <= 22) {
+    icon.src = "assets/images/clouds-img.png";
+  } else if (f_temp <= 100 || c_temp <= 38) {
+    icon.src = "assets/images/sun.png";
+  }
+}

@@ -48,9 +48,15 @@ body {
 }
 
 #main-place {
+    display: flex;
+    text-align: center;
+}
+
+#main-city-name {
+    display: inline-flex;
     background-color: #4e39c6;
-    border-radius: 12px;
-    padding: 4px 10px;
+    border-radius: 18px;
+    padding: 5px 15px;
 }
 
 #main-temperature {
@@ -116,7 +122,7 @@ body {
     padding-bottom: 10px;
 }
 
-.cloud-img {
+.weather-icon {
     width: 50px;
 }
 
@@ -209,11 +215,11 @@ body {
 }
 
 .highlights {
-    margin-bottom: 10px;
+    margin-bottom: 7px;
     background-color: #14203a;
     border-radius: 10px;
     padding: 10px;
-    height: 230px;
+    height: 228px;
 }
 
 .highlights-heading {
@@ -324,7 +330,7 @@ body {
     }
 
     #search-container {
-        margin-top: 20px;
+        margin-top: 10px;
         width: 340px;
     }
 
